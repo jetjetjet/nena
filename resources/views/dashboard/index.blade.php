@@ -19,13 +19,13 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>{{$card['totalTweet']}}</h3>
+            <h3>{{$data->card['totalTweet']}}</h3>
             <p>Jumlah Tweet</p>
           </div>
           <div class="icon"><ion-icon name=""></ion-icon>
             <i class="ion ion-chatbubbles"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
         </div>
       </div>
       <!-- ./col -->
@@ -33,13 +33,13 @@
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>{{$card['totalPositif']}}</h3>
+            <h3>{{$data->card['totalPositif']}}</h3>
             <p>Sentimen Positif</p>
           </div>
           <div class="icon">
             <i class="ion ion-happy"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
         </div>
       </div>
       <!-- ./col -->
@@ -47,13 +47,13 @@
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>{{$card['totalNetral']}}</h3>
+            <h3>{{$data->card['totalNetral']}}</h3>
             <p>Sentimen Netral</p>
           </div>
           <div class="icon">
             <i class="ion ion-heart"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
         </div>
       </div>
       <!-- ./col -->
@@ -61,13 +61,13 @@
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>{{$card['totalNegatif']}}</h3>
+            <h3>{{$data->card['totalNegatif']}}</h3>
             <p>Sentimen Negatif</p>
           </div>
           <div class="icon">
             <i class="ion ion-sad"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
         </div>
       </div>
     </div>
@@ -98,24 +98,35 @@
 @section('content-js')
 <script>
     $(document).ready(function (){
+      var bln = "{!! $data->chartBulan !!}";
+      var neg = "{!! $data->chartNegatif !!}";
+      var net = "{!! $data->chartNetral !!}";
+      var pos = "{!! $data->chartPositif !!}";
       var ctx = document.getElementById("lineChart").getContext('2d');
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+          labels: bln.split(','),
           datasets: [{
-            label: 'Series 1',
-            data: [500,	50,	2424,	14040,	14141,	4111,	4544,	47,	5555, 6811],
+            label: 'Positif',
+            data: pos.split(','),
             fill: false,
             borderColor: '#2196f3',
             backgroundColor: '#2196f3', 
             borderWidth: 1
           },{
-            label: 'Series 2',
-              data: [300,	150,	2124,	2314,	12141,	3111,	2544,	147,	4555, 9811],
+            label: 'Negatif',
+              data: neg.split(','),
               fill: false,
-              borderColor: '#2193d3',
-              backgroundColor: '#2196f3',
+              borderColor: '#ff0000',
+              backgroundColor: '#b22222',
+              borderWidth: 1
+          },{
+            label: 'Netral',
+              data: net.split(','),
+              fill: false,
+              borderColor: '#FFFF00',
+              backgroundColor: '#CCCC00',
               borderWidth: 1
           }]},
         options: {
