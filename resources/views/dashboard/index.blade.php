@@ -111,8 +111,8 @@
             label: 'Positif',
             data: pos.split(','),
             fill: false,
-            borderColor: '#2196f3',
-            backgroundColor: '#2196f3', 
+            borderColor: '#28A745',
+            backgroundColor: '#28A745', 
             borderWidth: 1
           },{
             label: 'Negatif',

@@ -32,14 +32,19 @@ class TarikTweetController extends Controller
   {
     
 		// dd(str_replace("-","",$startDate) .'0000',str_replace("-","",$endDate) .'2359');
-    $connection = new TwitterOAuth('COzGa5bWLq9vPs7oFgaxbFBkR', 
-     'ZHijCDDWH920NYQ4tuXpSu56WjjCsln53SOWQslOMZkvfcbF4w', 
-     '2444378161-tmUHbgrZmUkV6SNyJp0hQRtYYXCmOcCZHBzrYtT', 
-     '0J7Wc1AFTyXV8HKZnWrnXkEro9w9p2cbHbg5oS8owwkAX');
+    // $connection = new TwitterOAuth('COzGa5bWLq9vPs7oFgaxbFBkR', 
+    //  'ZHijCDDWH920NYQ4tuXpSu56WjjCsln53SOWQslOMZkvfcbF4w', 
+    //  '2444378161-tmUHbgrZmUkV6SNyJp0hQRtYYXCmOcCZHBzrYtT', 
+    //  '0J7Wc1AFTyXV8HKZnWrnXkEro9w9p2cbHbg5oS8owwkAX');
+		
+     $connection = new TwitterOAuth('AemNzBdm1eUNOHabKTEd71RU2', 
+     'NMTup8ccGrGxyL0tYko0V3mQ7NRVIJmaG1rO95i7PHUlRaL6yB', 
+     '1094045109904011264-DrBttGsC7AYeoPIR56Y5csoGWWHn9F', 
+     '43JrKjgp56nc1eDjwgMdOzO8UNXQ4UEaPATOpsyRJfQKU');
 		
 		$accessToken = $connection->oauth2('oauth2/token', array('grant_type' => 'client_credentials'));
-    $statuses = $connection->get("tweets/search/fullarchive/skr", 
-     ["query" => "psbb @aniesbaswedan", 
+    $statuses = $connection->get("tweets/search/fullarchive/development", 
+     ["query" => "psbb jakarta",  
       //"tweet_mode" => "extended", 
       "fromDate" => str_replace("-","",$startDate) .'0000', 
       "toDate" => str_replace("-","",$endDate) .'2359']
@@ -85,8 +90,8 @@ class TarikTweetController extends Controller
           $params = array(
             'id' => $row->id,
             'date' => date('Y-m-d H:m', strtotime($row->created_at)),
-            'raw' => $tweetRaw ?: null,
-            'text' => $output ?: null,
+            'raw' => $tweetRaw ?: 'invalid_tweet',
+            'text' => $output ?: 'invalid_tweet',
             'ava' => $row->user->profile_image_url ?? null,
             'username' => $row->user->name ?? null,
             'scores' => $scores,
@@ -102,7 +107,6 @@ class TarikTweetController extends Controller
       
       DB::commit();
     } catch(\Exception $e){
-      dd($e);
       $respons['status'] = "error";
       $respons['messages'] = "Tidak dapat menarik opini!";
       DB::rollback();

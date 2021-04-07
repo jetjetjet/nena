@@ -122,6 +122,7 @@ class HomeController extends Controller
         // ->where('tweetdate', 'LIKE', '%' . $filter . '%')
         ->groupByRaw("DATE_TRUNC('month',tweetdate::date)::date, pos.sentimen, net.sentimen, neg.sentimen, to_char(tweetdate, 'YYYY')")
         ->selectRaw(DB::raw("to_char(DATE_TRUNC('month',tweetdate::date)::date, 'MM') as month, to_char(tweetdate, 'YYYY') as year, pos.sentimen as pos, net.sentimen as net, neg.sentimen as neg"))
+        ->orderByRaw("to_char(tweetdate, 'YYYY')")
         ->get();
     return $q;
   }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TarikTweetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AnalyticController;
+use App\Http\Controllers\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::get('/tarik-data', [TarikTweetController::class, 'index']);
 
 Route::get('/analytic', [AnalyticController::class, 'index']);
 Route::get('/analytic/lists', [AnalyticController::class, 'getLists']);
+
+Route::get('/export/index', [ExportController::class, 'index']);
+Route::get('/export-tweet', [ExportController::class, 'export']);

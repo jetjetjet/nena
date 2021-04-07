@@ -25,12 +25,17 @@
         <li class="nav-header">Master</li>
         <li class="nav-item">
           <a href="{{ url('/analytic') }}" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i><p> Sentimen </p>
+            <i class="nav-icon fas fa-chart-bar"></i><p> Sentimen </p>
           </a>
         </li>
         <li class="nav-item">
           <a href="{{ url('/tarik-data') }}" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i><p> Tarik Data </p>
+            <i class="nav-icon fas fa-download"></i><p> Tarik Data </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url('/export/index') }}" class="nav-link">
+            <i class="nav-icon fas fa-upload"></i><p> Ekspor Data </p>
           </a>
         </li>
       </ul>
