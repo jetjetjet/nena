@@ -11,8 +11,8 @@
         <!-- <img src="{{ url('/') }}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
       </div>
        <div class="info">
-        <a href="#" class="d-block">Neina Corina</a>
-        <a href="#" class="d-block">NIM</a>
+        <a href="#" class="d-block">Selamat Datang,</a>
+        <a href="#" class="d-block"> {{ session('name') }}</a>
       </div>
     </div>
     <nav class="mt-2">
@@ -28,14 +28,26 @@
             <i class="nav-icon fas fa-chart-bar"></i><p> Sentimen </p>
           </a>
         </li>
+        @if(session('role') == 'admin')
         <li class="nav-item">
           <a href="{{ url('/tarik-data') }}" class="nav-link">
             <i class="nav-icon fas fa-download"></i><p> Tarik Data </p>
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ url('/user') }}" class="nav-link">
+            <i class="nav-icon fas fa-users"></i><p> User </p>
+          </a>
+        </li>
+        @endif
+        <li class="nav-item">
           <a href="{{ url('/export/index') }}" class="nav-link">
             <i class="nav-icon fas fa-upload"></i><p> Ekspor Data </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url('/logout') }}" class="nav-link">
+            <i class="nav-icon fa fa-sign-out-alt"></i><p> Logout </p>
           </a>
         </li>
       </ul>

@@ -5,6 +5,8 @@ use App\Http\Controllers\TarikTweetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AnalyticController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +18,25 @@ use App\Http\Controllers\ExportController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/tarik-data', [TarikTweetController::class, 'index']);
 
-Route::get('/analytic', [AnalyticController::class, 'index']);
-Route::get('/analytic/lists', [AnalyticController::class, 'getLists']);
+Route::get('login', [AuthController::class, 'index']);
+Route::post('login', [AuthController::class, 'login']);
+Route::get('logout', [AuthController::class, 'logout']);
 
-Route::get('/export/index', [ExportController::class, 'index']);
-Route::get('/export-tweet', [ExportController::class, 'export']);
+Route::group(array('middleware' => 'auth'), function ()
+{
+  Route::get('/', [HomeController::class, 'index']);
+  Route::get('/tarik-data', [TarikTweetController::class, 'index'])->middleware('role:admin');
+  
+  Route::get('/analytic', [AnalyticController::class, 'index']);
+  Route::get('/analytic/lists', [AnalyticController::class, 'getLists']);
+  
+  Route::get('/export/index', [ExportController::class, 'index']);
+  Route::get('/export-tweet', [ExportController::class, 'export']);
+
+  Route::get('/user', [UserController::class, 'index']);
+  Route::get('/user/grid', [UserController::class, 'grid']);
+  Route::get('/user/edit/{id?}', [UserController::class, 'edit']);
+  Route::post('/user', [UserController::class, 'save']);
+  Route::delete('/user/{id?}', [UserController::class, 'delete']);
+});
