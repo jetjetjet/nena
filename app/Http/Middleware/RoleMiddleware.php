@@ -27,7 +27,7 @@ class RoleMiddleware
       }
 
       if (!empty($actions)){
-        if ($actions != $user->getRole()){
+        if ($actions[0] != $user->getRole()){
           return self::terminateRequest($request, self::$unauhorizedMessage, 401);
         }
       }
